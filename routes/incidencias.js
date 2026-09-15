@@ -1,5 +1,5 @@
 const express = require('express'); 
-const router = express.Router
+const router = express.Router();
 
 const {
     registrarIncidencia, 
@@ -10,11 +10,6 @@ const {
     cambiarEstado, 
     eliminarIncidencia,
     
-
-
-
-
-
 } = require("../controllers/incidenciasControllers"); 
 router.post('/', registrarIncidencia); 
 router.get('/', listarIncidencias); 

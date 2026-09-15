@@ -1,4 +1,48 @@
-const incidencias = [];
+const incidencias = []; 
+let siguienteId = 1; 
+ 
+//Resgitro de incidencias
+function registrarIncidencia(req, res) { 
+    const { empleado, area, descripcion, prioridad } = req.body; 
+
+    if (empleado.trim() === "") { 
+        return res.status(400).json({ 
+            mensaje: "El empleado es obligatorio" 
+        }); 
+    }    
+    if (area.trim() === "") { 
+        return res.status(400).json({ 
+            mensaje: "El área es obligatoria" 
+        }); 
+    } 
+    if (descripcion.trim() === "") { 
+        return res.status(400).json({ 
+            mensaje: "La descripción es obligatoria" 
+        }); 
+    } 
+    if (prioridad !== "Alta" && 
+        prioridad !== "Media" && 
+        prioridad !== "Baja") { 
+
+        return res.status(400).json({ 
+            mensaje: "La prioridad debe ser Alta, Media o Baja" 
+        }); 
+    } 
+ 
+    const nuevaIncidencia = { 
+        id: siguienteId, 
+        empleado: empleado, 
+        area: area, 
+        descripcion: descripcion, 
+        prioridad: prioridad, 
+        estado: "Pendiente" 
+    }; 
+ 
+    incidencias.push(nuevaIncidencia); 
+    siguienteId++; 
+ 
+    res.status(201).json(nuevaIncidencia); 
+}
 
 // Estadisticas
 const obtenerEstadisticas = (req, res) => {
@@ -34,8 +78,11 @@ const clasificarIncidencias = (req, res) => {
 };
 
 
-module.exports{
+module.exports = {
+    registrarIncidencia,
+    listarIncidencias,
+    buscarIncidenciaID,
     obtenerEstadisticas,
     clasificarIncidencias
-}
+};
 
