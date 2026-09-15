@@ -23,3 +23,5 @@ router.get('/estadisticas', obtenerEstadisticas);
 router.get('/:id/clasificacion', clasificarIncidencias); 
 router.put('/:id/estado', cambiarEstado); 
 router.delete('/:id', eliminarIncidencia); 
+
+module.exports = router; 
