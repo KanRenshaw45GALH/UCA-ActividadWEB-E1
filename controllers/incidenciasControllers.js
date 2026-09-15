@@ -1,34 +1,22 @@
+const {
+    validarCamposIncidencia,
+    esPrioridadValida,
+    esEstadoValido
+    
+} = require ('../utils/helpers')
+
 const incidencias = []; 
 let siguienteId = 1; 
  
 //Resgitro de incidencias
 function registrarIncidencia(req, res) { 
     const { empleado, area, descripcion, prioridad } = req.body; 
+    const validacion = validarCamposIncidencia(req.body); 
+    
+    if (!validacion.valido){
+        return res.status(400).json({mensaje: validacion.mensaje})
+    }
 
-    if (empleado.trim() === "") { 
-        return res.status(400).json({ 
-            mensaje: "El empleado es obligatorio" 
-        }); 
-    }    
-    if (area.trim() === "") { 
-        return res.status(400).json({ 
-            mensaje: "El área es obligatoria" 
-        }); 
-    } 
-    if (descripcion.trim() === "") { 
-        return res.status(400).json({ 
-            mensaje: "La descripción es obligatoria" 
-        }); 
-    } 
-    if (prioridad !== "Alta" && 
-        prioridad !== "Media" && 
-        prioridad !== "Baja") { 
-
-        return res.status(400).json({ 
-            mensaje: "La prioridad debe ser Alta, Media o Baja" 
-        }); 
-    } 
- 
     const nuevaIncidencia = { 
         id: siguienteId, 
         empleado: empleado, 
@@ -80,7 +68,9 @@ const cambiarEstado = (req, res) => {
     if (!estado || estado.trim() === "") {
         return res.status(400).json({ mensaje: "El campo estado es obligatorio" });
     }
-
+    if (!esEstadoValido(estado)){
+        return res.status(400).json({mensaje:'Estado no valido'})
+    }
     switch (estado) {
         case "Pendiente":
         case "En Proceso":
