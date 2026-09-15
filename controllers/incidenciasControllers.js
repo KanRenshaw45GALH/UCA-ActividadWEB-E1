@@ -49,7 +49,22 @@ function listarIncidencias(req, res) {
     res.status(200).json(incidencias);
 }
 
+// Buscar incidencia por ID
+function buscarIncidenciaID(req, res) {
 
+    const id = parseInt(req.params.id);
+    const incidencia = incidencias.find(function (incidencia) {
+        return incidencia.id === id;
+    });
+
+    if (!incidencia) {
+        return res.status(404).json({
+            mensaje: "Incidencia no encontrada"
+        });
+    }
+
+    res.status(200).json(incidencia);
+}
 
 // Estadisticas
 const obtenerEstadisticas = (req, res) => {
