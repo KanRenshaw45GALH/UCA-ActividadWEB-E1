@@ -44,6 +44,13 @@ function registrarIncidencia(req, res) {
     res.status(201).json(nuevaIncidencia); 
 }
 
+// Listar incidencias
+function listarIncidencias(req, res) {
+    res.status(200).json(incidencias);
+}
+
+
+
 // Estadisticas
 const obtenerEstadisticas = (req, res) => {
     res.json({
