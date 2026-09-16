@@ -121,14 +121,14 @@ const obtenerEstadisticas = (req, res) => {
 // Clasificacion de incidencias
 const clasificarIncidencias = (req, res) => {
     const id = parseInt(req.params.id);
-    const incidencia = incidencia.find(i => i.id === id);
+    const incidencia = incidencias.find(i => i.id === id);
 
     if(!incidencia){
         return res.status(404).json({ mensaje: "Incidencia no encontrada"});
     }
 
     let clasificacion;
-    switch(incidencias.prioridad) {
+    switch(incidencia.prioridad) {
         case "Alta" :  clasificacion = "Crítica"; 
         break;
         case "Media" : clasificacion = "Importante";
