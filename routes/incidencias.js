@@ -7,20 +7,16 @@ const {
     buscarIncidenciaID,
     obtenerEstadisticas,
     clasificarIncidencias, 
-/*
     cambiarEstado, 
     eliminarIncidencia,
-*/
     
 } = require("../controllers/incidenciasControllers"); 
 router.post('/registrar', registrarIncidencia); 
 router.get('/listar', listarIncidencias); 
 router.get('/estadisticas', obtenerEstadisticas); 
-router.get('/:id/clasificacion', clasificarIncidencias); 
+router.get('/clasificacion/:id', clasificarIncidencias); 
 router.get('/listar/:id', buscarIncidenciaID); 
-/*
-router.put('/cambiarEstado/:id/estado', cambiarEstado); 
+router.put('/cambiarEstado/estado/:id', cambiarEstado); 
 router.delete('/eliminar/:id', eliminarIncidencia); 
-*/
 
 module.exports = router; 
